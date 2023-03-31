@@ -1791,7 +1791,7 @@
                   </div>
                   <div class="col-12">
                     <div class="port_contact_form">
-                      <form action="./assets/php/sendemail.php" method="post">
+                      <form id="contact-form"  action="#" onsubmit="sendMail(event)" >
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
@@ -2134,5 +2134,42 @@
     <script src="assets/js/jquery-jvectormap-world-mill.js"></script>
     <script src="assets/js/scrollbar.js"></script>
     <script src="assets/js/custom.js"></script>
+
+    <!-- SMTP JAVASCRIPT(CONTACT FORM) CONFIG -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <script>
+
+      const form = document.getElementById("contact-form");
+      const name = document.getElementById("name");
+      const lastName = document.getElementById("last-name");
+      const email = document.getElementById("email");
+      const subject = document.getElementById("subject");
+      const body = document.getElementById("comment");
+
+      //Fuction When Submit Button is Triggered
+      function sendMail(e){
+        e.preventDefault();
+
+        // Send Email...
+        Email.send({
+          Host : "smtp.elasticemail.com",
+          Username : "imnotmanoj07@gmail.com",
+          Password : "p9CF4BCF74695852C1BDF76C566267CEC09A4",
+          To : 'imnnotmanoj07@gmail.com',
+          From : email.value,
+          name : name.value,
+          last_name : lastName.value,
+          Subject : subject.value,
+          Body : body.value
+          }).then(
+          message =>alert(message)
+          );
+      }
+      // Event listener to Sumbit Button
+      form.addEventListener('submit', sendMail);
+
+    </script>
+
   </body>
 </html>
